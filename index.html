@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<!--CopyRight Kurniawan Eko Wasono-->
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kalkulator Lumen/Liter LED</title>
+	<link rel="stylesheet" type="text/css" href="lumen.css" />
+</head>
+<body>
+<div id="CalUkuran">
+	<div id="UkuranKiri">
+		<form>
+			<h3>Masukkan Spesifikasi Tank</h3>
+			<div id="LabelUkuran">
+				<div class="spasibawah"><label for="panjang">Panjang (cm) </label></div>
+				<div class="spasibawah"><label for="lebar">Lebar (cm) </label></div>
+				<div class="spasibawah"><label for="tinggi">Tinggi (cm) </label></div>
+				<div class="spasibawah"><label for="substrate">Tinggi Substrate (cm) </label></div>
+			</div>
+			<div id="InputUkuran">
+				<div class="spasibawah">= <input type="number" id="panjang" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
+				<div class="spasibawah">= <input type="number" id="lebar" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
+				<div class="spasibawah">= <input type="number" id="tinggi" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
+				<div class="spasibawah">= <input type="number" id="substrate" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
+			</div>
+		</form>
+	</div>
+	<div id="UkuranKanan">
+		Ukuran tank = <b class="hurufGede" id="ukuran">0 x 0 x 0</b> <br>
+		Volume tank = <b class="hurufGede" id="volume">0 liter</b><br>
+		Volume air = <b class="hurufGede" id="volair">0 liter</b><br><br>
+		<a href="javascript:void(0)" name="ket3" onclick="keterangan(this);return false;" class="spasibawah">Rekomendasi Total Watt LED***</a><br> 
+		<select id="light" onchange="dayaLed()">
+			<option value="15">Low Light</option>
+			<option value="26">Medium Light</option>
+			<option value="51">High Light</option>
+		</select> 
+		= <b class="hurufGede" id="rekomendasi">0 Watt</b>
+	</div>
+</div>
+<div id="CalLed">
+	<div id="LedKiri">
+		<h3>Masukkan Jumlah LED Yang Akan Digunakan</h3>
+		<form>
+			<div id="LabelLed">
+				<div class="spasibawah"><label><a href="javascript:void(0)" name="ket1" onclick="keterangan(this);return false;">Daya per LED* </a></label></div>
+				<div class="spasibawah"><label for="putih">Led Putih </label></div>
+				<div class="spasibawah"><label for="merah">Led Merah </label></div>
+				<div class="spasibawah"><label for="biru">Led Biru </label></div>
+			</div>
+			<div id="InputLed">
+				<div class="spasibawah"><input type="radio" id="1" name="watt" value="1" onchange="handleClick(this);" checked="checked" /><label for="1">1W</label>
+				<input type="radio" id="3" name="watt" value="3" onchange="handleClick(this);" /><label for="3">3W</label></div>
+				<div class="spasibawah">= <input type="number" id="putih" size="5" placeholder="isi angka" onkeyup="hitungLumen()" onchange="hitungLumen()"/></div>
+				<div class="spasibawah">= <input type="number" id="merah" size="5" placeholder="isi angka" onkeyup="hitungLumen()" onchange="hitungLumen()"/></div>
+				<div class="spasibawah">= <input type="number" id="biru" size="5" placeholder="isi angka" onkeyup="hitungLumen()" onchange="hitungLumen()"/></div>
+			</div>
+		</form>
+	</div>
+	<div id="LedKanan">
+		<br>Lumen/Liter = <b class="hurufGede" id="hasilLumen">0</b>
+		<br><a href="javascript:void(0)" name="ket2" onclick="keterangan(this);return false;">Kategori**</a> = <b class="hurufGede" id="kategori">Not Enough Light</b>
+	</div>
+</div>
+<div id="Info">
+<div id="JudulInfo"><h3>Informasi Lainnya</h3></div>
+	<div id="InfoKiri">
+		<h3>Filtrasi</h3>
+		Minimal = <b class="hurufGede" id="filmin">0 l/h</b>
+		<br>Maksimal = <b class="hurufGede" id="filmax">0 l/h</b>
+	</div>
+	<div id="InfoKanan">
+		<h3>Kebutuhan Substrate</h3>
+		Total = <b class="hurufGede" id="volSubstrate">0 liter</b>
+		<br>Soil Amazonia 9L = <b class="hurufGede" id="amazonia">0 kantong</b>
+		<br>Pasir Malang = <b class="hurufGede" id="malang">&plusmn; 0 kg</b>
+		<br>Pasir Silika = <b class="hurufGede" id="silika">&plusmn; 0 kg</b>
+	</div>
+</div>
+<div id="Keterangan">
+<div id="ket" class="fadein"><b>Keterangan klik tulisan merah</b></div>
+	<div id="ket1" class="fadeout">
+		<b>*Nilai Lumen LED 1W</b>
+		<ul style="list-style-type:square">
+			<li>Led Putih (Warm, Daylight, White, Cool, Cold) = 110 - 120 lm</li>
+			<li>Led Merah (Grow Red 660 nm) = 45 - 55 lm</li>
+			<li>Led Biru (Grow Blue 455 nm) = 25 - 30 lm</li>
+		</ul>
+		<b>*Nilai Lumen LED 3W</b>
+		<ul style="list-style-type:square">
+			<li>Led Putih (Warm, Daylight, White, Cool, Cold) = 200 - 220 lm</li>
+			<li>Led Merah (Grow Red 660 nm) = 90 - 110 lm</li>
+			<li>Led Biru (Grow Blue 455 nm) = 40 - 45 lm</li>
+		</ul>
+	</div>
+	<div id="ket2" class="fadeout">
+		<b>**Kategori Pencahayaan Berdasarkan Lumen/Liter</b>
+		<ul style="list-style-type:square">
+			<li>15 - 25 lumen/liter = Low Light / Easy</li>
+			<li>25 - 50 lumen/liter = Medium Light</li>
+			<li>&#62; 50 lumen/liter = High Light / Advance</li>
+		</ul>
+	</div>
+	<div id="ket3" class="fadeout">
+		<b>***Rekomendasi daya LED dengan asumsi semua LED berwarna putih.</b>
+	</div>
+</div>
+<script type="text/javascript" src="lumen.js"></script>
+</body>
+</html>
