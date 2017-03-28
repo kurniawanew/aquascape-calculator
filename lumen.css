@@ -21,3 +21,103 @@ input[type="number"] {width: 90px;}
 #Keterangan {background: hotpink; width: 700px; padding: 5px 0 5px 0; display: table;}
 #LabelUkuran, #InputUkuran, #LabelLed, #InputLed {float: left; position: relative; display: table-cell; width: 50%;}
 .hurufGede {font-size: x-large;}
+
+.jumbotron {
+	background-image: url(aquascape.jpg);
+	background-position: bottom;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-origin: content-box;
+	height: 300px;
+	color: #fff !important;
+	padding: 100px;
+}
+
+.navbar {
+	background-color: #66cc00 !important;
+}
+
+.navbar {
+    margin-bottom: 0;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+}
+
+.navbar-brand {
+	font-size: 25px !important;
+	letter-spacing: 0px;
+	vertical-align: middle;
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    background-color: #fff !important;
+    color: #66cc00 !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+body {
+    font: 400 20px 'Noto Sans', sans-serif;
+    line-height: 1.8;
+    color: #000000;
+    position: relative;
+}
+
+.navbar {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #303030;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    color: #303030;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.navbar-brand {
+    font-family: 'Luckiest Guy', cursive;
+}
+
+footer {
+    background-color: #66cc00;
+    width: 100%;
+    color: #fff;
+}
+
+.btn-default:hover {
+    background-color: #007399 !important;
+    color: #fff;
+    border-color: transparent;
+}
+
+.btn-default {
+    background-color: #66cc00 !important;
+    color: #fff;
+    border-color: transparent;
+    border-radius: 0;
+}
+
+.panel, .well, .panel-heading, .panel-footer {
+    border-radius: 0 !important;
+    background-color: #fff !important;
+}
