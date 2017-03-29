@@ -66,9 +66,12 @@
    				</div>
  			</div>
  			<h3 class="text-center">Pencahayaan</h3>
- 			<div class="form-group text-center">
- 				<label class="radio-inline"><input type="radio" name="jenis" value="led" checked>LED</label>
-				<label class="radio-inline"><input type="radio" name="jenis" value="bukanLed">Bukan LED</label>
+ 			<div class="form-group">
+ 				<label class="control-label col-sm-4" for="jenis">Jenis Lampu </label>
+   				<div class="col-sm-4">
+   					<label class="radio-inline"><input type="radio" name="jenis" value="led" checked>LED</label>
+					<label class="radio-inline"><input type="radio" name="jenis" value="bukanLed">Bukan LED</label>
+   				</div>
 			</div>
 			<div class="collapse in" id="led">
 				<p class="text-center">Masukkan jumlah lampu LED yang digunakan menurut daya dan warnanya</p>
@@ -117,9 +120,9 @@
 			<h2 class="text-center">Hasil</h2>
 			<table class="table table-striped table-bordered">
 				<tr>
-					<td><strong>Pencahayaan</strong></td>
-					<td>Kategori Pencahayaan</td>
-					<td><span id="kategori"></span></td>
+					<td  class="col-sm-5"><strong>Pencahayaan</strong></td>
+					<td  class="col-sm-4">Kategori Pencahayaan</td>
+					<td  class="col-sm-3"><span id="kategori"></span></td>
 				</tr>
 				<tr>
 					<td rowspan="3">
@@ -138,9 +141,9 @@
 					<td><span id="rekomLow"></span></td>
 				</tr>
 				<tr>
-					<td rowspan="2" class="col-sm-4"><strong>Volume</strong></td>
-					<td class="col-sm-4">Volume tank</td>
-					<td class="col-sm-4"><span id="volume"></span></td>
+					<td rowspan="2"><strong>Volume</strong></td>
+					<td>Volume tank</td>
+					<td><span id="volume"></span></td>
 				</tr>
 				<tr>
 					<td>Volume air</td>
@@ -174,6 +177,7 @@
 				</tr>
 			</table>
 		</div>
+		<div id="disqus_thread"></div>
 	</div>
 	<div class="col-sm-4 col-md-4">
 		<h3>Sponsored</h3><hr>
@@ -186,5 +190,24 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript" src="lumen.min.js"></script>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = "http://buataquascape.ml";  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = "buataquascape.ml"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://buataquascape.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </body>
 </html>

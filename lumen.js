@@ -126,6 +126,7 @@ $(document).ready(function(){
 		}
 	});
 
+	var isKaton = false;
 	$("#hitung").click(function(){
 		ukuranTank();
 		if(iniLed) {
@@ -137,10 +138,13 @@ $(document).ready(function(){
 		}
 		
 		$("#hasilHitung").collapse("show");
-		$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+		if(isKaton) {
+			$('html, body').animate({ scrollTop: $("#hasilHitung").offset().top }, 1000);
+		}
 	});
 
 	$("#hasilHitung").on('shown.bs.collapse', function(){
-        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+		isKaton = true;
+        $('html, body').animate({ scrollTop: $("#hasilHitung").offset().top }, 1000);
     });
 });
