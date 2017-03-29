@@ -1,10 +1,8 @@
-var panjang, lebar, tinggi, substrate, putih, merah, biru, watt = 1, volAir;
-
 function ukuranTank() {
-	panjang = $("#panjang").val();
-   	lebar = $("#lebar").val();
-   	tinggi = $("#tinggi").val();
-   	substrate = $('#substrate').val();
+	var panjang = $("#panjang").val();
+   	var lebar = $("#lebar").val();
+   	var tinggi = $("#tinggi").val();
+   	var substrate = $('#substrate').val();
    	if (panjang != "" && lebar != "" && tinggi != "" && substrate != "") {
 		var volume = (panjang*lebar*tinggi)/1000;
 		var volSubstrate = (panjang * lebar * substrate)/1000;
@@ -12,7 +10,6 @@ function ukuranTank() {
 		var malang = (volSubstrate*0.6).toFixed(2);
 		var silika = (volSubstrate*1.2).toFixed(2);
 		volAir = (panjang * lebar * (tinggi - substrate))/1000;
-		$("#ukuran").text(panjang+" x "+lebar+" x "+tinggi);
 		$("#volume").text(volume+" liter");
 		$("#volair").text(volAir+" liter");
 		$("#filmin").text(volume*5+" l/h");
@@ -21,82 +18,40 @@ function ukuranTank() {
 		$("#amazonia").html("&plusmn; "+pecahan(amazonia) +" kantong");
 		$("#malang").html("&plusmn; "+ pecahan(malang) +" kg");
 		$("#silika").html("&plusmn; "+ pecahan(silika) +" kg");
-		dayaLed();
-		if (putih != undefined || merah != undefined || biru != undefined) {
-			hitungLumen();
-		}
 	}
 }
 
-function hitungLumen () {
-	putih = $('#putih').val();
-   	merah = $('#merah').val();
-   	biru = $('#biru').val();
-   	if (panjang != undefined && lebar != undefined && tinggi != undefined && substrate != undefined) {
-   		if (panjang != "" && lebar != "" && tinggi != "" && substrate != "") {
-   			if (putih != "" || merah != "" || biru != "") {
-				var lumen;
-				if (watt==1) {
-					lumen = (putih*110)+(merah*45)+(biru*25);
-				} else if (watt==3) {
-					lumen = (putih*200)+(merah*90)+(biru*40);
-				}
-				var lumenLiter = lumen / volAir;
-				$("#hasilLumen").text(lumenLiter.toFixed(2));
-				if (lumenLiter>=15 && lumenLiter<=25) {
-					$("#kategori").text("Low Light");
-				}
-				else if (lumenLiter>25 && lumenLiter<=50) {
-					$("#kategori").text("Medium Light");
-				}
-				else if (lumenLiter>50) {
-					$("#kategori").text("High Light");
-				}
-				else {
-					$("#kategori").text("Not Enough Light");
-				}
-			}
-		} else {
-			alert("Lengkapi Spesifikasi Tank")
-		}
-	} else {
-		alert("Masukkan Spesifikasi Tank")
-	}
-}
+function hitungLed () {
+	var putih1Watt = ($("#led1WattPutih").val() != '') ? $("#led1WattPutih").val() : 0;
+	var merah1Watt = ($("#led1WattMerah").val() != '') ? $("#led1WattMerah").val() : 0;
+	var biru1Watt = ($("#led1WattBiru").val() != '') ? $("#led1WattBiru").val() : 0;
+	var putih3Watt = ($("#led3WattPutih").val() != '') ? $("#led3WattPutih").val() : 0;
+	var merah3Watt = ($("#led3WattMerah").val() != '') ? $("#led3WattMerah").val() : 0;
+	var biru3Watt = ($("#led3WattBiru").val() != '') ? $("#led3WattBiru").val() : 0;
+	var lumen = (putih1Watt*110)+(merah1Watt*45)+(biru1Watt*25)+(putih3Watt*200)+(merah3Watt*90)+(biru3Watt*40);
+	var lumenLiter = lumen / volAir;
+	var kategori;
 
-function dayaLed() {
-	var daya;
-	var light = $("#light").val();
-	if (volAir != undefined) {
-		daya = volAir*light/110;
-		$("#rekomendasi").text(Math.ceil(daya) +" Watt");
-	} else {
-		alert("Masukkan spesifikasi tank");
+	if (lumenLiter>=15 && lumenLiter<=25) {
+		kategori = "Low Light";
 	}
-}
-
-function keterangan(ini) {
-	var y = document.getElementById(ini.name).className;
-	for (var a = 1; a <= 3; a++) {
-		document.getElementById("ket"+a).className = "fadeout";
+	else if (lumenLiter>25 && lumenLiter<=50) {
+		kategori = "Medium Light";
 	}
-	if (y == "fadeout") {
-		document.getElementById(ini.name).className = "fadein";
-		document.getElementById("ket").className = "fadeout";
+	else if (lumenLiter>50) {
+		kategori = "High Light";
 	}
 	else {
-		document.getElementById(ini.name).className = "fadeout";
-		document.getElementById("ket").className = "fadein";
+		kategori = "Cahaya Tidak Cukup!";
 	}
+
+	$("#kategori").text(kategori);
 }
 
-function handleClick(radio) {
-	watt = radio.value;
-	if (putih != undefined || merah != undefined || biru != undefined) {
-   		hitungLumen();
-   	} else {
-   		alert("Masukkan jumlah LED");
-   	}
+function rekomendasiLed() {
+	$("#rekomHigh").text(Math.ceil(volAir*51/110)+" Watt");
+	$("#rekomMedium").text(Math.ceil(volAir*26/110)+" Watt");
+	$("#rekomLow").text(Math.ceil(volAir*16/110)+" Watt");
 }
 
 function pecahan(angka) {
@@ -126,3 +81,29 @@ function pecahan(angka) {
 	}
 	return jadiPecahan;
 }
+
+$(document).ready(function(){
+
+	$("input[name='jenis']:radio").change(function(){
+		console.log($(this).val());
+		if($(this).val() == "led") {
+			$("#led").collapse("show");
+			$("#bukanLed").collapse("hide");
+		} else if($(this).val() == "bukanLed") {
+			$("#bukanLed").collapse("show");
+			$("#led").collapse("hide");
+		}
+	});
+
+	$("#hitung").click(function(){
+		ukuranTank();
+		hitungLed();
+		rekomendasiLed();
+		$("#hasilHitung").collapse("show");
+		$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+	});
+
+	$("#hasilHitung").on('shown.bs.collapse', function(){
+        $("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
+    });
+});

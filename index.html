@@ -3,7 +3,7 @@
 <!--CopyRight Kurniawan Eko Wasono-->
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width" intitial-scale="1" maximum-scale="1">
 	<title>Kalkulator Lumen/Liter LED</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -16,122 +16,165 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
-      </button>
+      </button> -->
       <a class="navbar-brand" href="">buatAquascape.ml</a>
     </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <!-- <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-      	<!-- <li id="blog"><a href="blog">BLOG</a></li>
+      	<li id="blog"><a href="blog">BLOG</a></li>
         <li id="cv"><a href="cv">SIAPA SAYA?</a></li>
         <li id="portofolio"><a href="portofolio">PORTOFOLIO</a></li>
-        <li id="kontak"><a href="kontak">KONTAK</a></li> -->
+        <li id="kontak"><a href="kontak">KONTAK</a></li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </nav>
 
 <div class="jumbotron"><h1>Kalkulator Aquascape</h1></div>
 
-<div id="CalUkuran">
-	<div id="UkuranKiri">
-		<form>
-			<h3>Masukkan Spesifikasi Tank</h3>
-			<div id="LabelUkuran">
-				<div class="spasibawah"><label for="panjang">Panjang (cm) </label></div>
-				<div class="spasibawah"><label for="lebar">Lebar (cm) </label></div>
-				<div class="spasibawah"><label for="tinggi">Tinggi (cm) </label></div>
-				<div class="spasibawah"><label for="substrate">Tinggi Substrate (cm) </label></div>
+<div class="row">
+	<div class="col-sm-8">
+		<form class="form-horizontal" id="specForm">
+			<h3 class="text-center">Spesifikasi Tank</h3>
+			<div class="form-group">
+   				<label class="control-label col-sm-4" for="panjang">Panjang (cm) </label>
+   				<div class="col-sm-4">
+   					<input type="number" id="panjang" class="form-control" placeholder="panjang" />
+   				</div>
 			</div>
-			<div id="InputUkuran">
-				<div class="spasibawah">= <input type="number" id="panjang" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
-				<div class="spasibawah">= <input type="number" id="lebar" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
-				<div class="spasibawah">= <input type="number" id="tinggi" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
-				<div class="spasibawah">= <input type="number" id="substrate" size="5" placeholder="isi angka" onchange="ukuranTank();" onkeyup="ukuranTank();" /></div>
+			<div class="form-group">
+				<label class="control-label col-sm-4" for="lebar">Lebar (cm) </label>
+  				<div class="col-sm-4">
+   					<input type="number" id="lebar" class="form-control" placeholder="lebar" />
+   				</div>
+ 			</div>
+ 			<div class="form-group">
+ 				<label class="control-label col-sm-4" for="tinggi">Tinggi (cm) </label>
+   				<div class="col-sm-4">
+   					<input type="number" id="tinggi" class="form-control" placeholder="tinggi" />
+   				</div>
+ 			</div>
+ 			<div class="form-group">
+ 				<label class="control-label col-sm-4" for="substrate">Tinggi Substrate (cm) </label>
+   				<div class="col-sm-4">
+   					<input type="number" id="substrate" class="form-control" placeholder="tinggi substrate" />
+   				</div>
+ 			</div>
+ 			<h3 class="text-center">Pencahayaan</h3>
+ 			<div class="form-group text-center">
+ 				<label class="radio-inline"><input type="radio" name="jenis" value="led" checked>LED</label>
+				<label class="radio-inline"><input type="radio" name="jenis" value="bukanLed">Bukan LED</label>
 			</div>
+			<div class="collapse in" id="led">
+				<p class="text-center">Masukkan jumlah lampu LED yang digunakan menurut daya dan warnanya</p>
+ 				<div class="form-group">
+ 					<label class="control-label col-sm-4" for="led1WattPutih">LED 1 Watt </label>
+   					<div class="col-sm-2">
+   						<input type="number" id="led1WattPutih" class="form-control" placeholder="putih" />
+	   				</div>
+
+   					<div class="col-sm-2">
+	   					<input type="number" id="led1WattMerah" class="form-control" placeholder="merah" />
+   					</div>
+
+   					<div class="col-sm-2">
+   						<input type="number" id="led1WattBiru" class="form-control" placeholder="biru" />
+	   				</div>
+ 				</div>
+ 				<div class="form-group">
+ 					<label class="control-label col-sm-4" for="led3WattPutih">LED 3 Watt </label>
+   					<div class="col-sm-2">
+	   					<input type="number" id="led3WattPutih" class="form-control" placeholder="putih" />
+   					</div>
+
+   					<div class="col-sm-2">
+   						<input type="number" id="led3WattMerah" class="form-control" placeholder="merah" />
+	   				</div>
+
+   					<div class="col-sm-2">
+	   					<input type="number" id="led3WattBiru" class="form-control" placeholder="biru" />
+   					</div>
+ 				</div>
+ 			</div>
+ 			<div class="collapse" id="bukanLed">
+ 				<p class="text-center">Masukkan jumlah total daya lampu yang digunakan</p>
+				<div class="form-group">
+ 					<label class="control-label col-sm-4" for="daya">Daya lampu (Watt)</label>
+   					<div class="col-sm-4">
+	   					<input type="number" id="daya" class="form-control" placeholder="daya lampu" />
+   					</div>
+ 				</div>
+			</div>
+			<button type="button" class="btn btn-success btn-block" id="hitung">HITUNG</button>
 		</form>
+		<br>
+		<div class="container-fluid collapse" id="hasilHitung">
+			<table class="table table-striped table-bordered">
+				<tr>
+					<td><strong>Pencahayaan</strong></td>
+					<td>Kategori Pencahayaan</td>
+					<td><span id="kategori"></span></td>
+				</tr>
+				<tr>
+					<td rowspan="3">
+						<strong>Rekomendasi Pencahayaan</strong>
+						<br>(bila menggunakan warna cahaya putih)
+					</td>
+					<td>High light</td>
+					<td><span id="rekomHigh"></span></td>
+				</tr>
+				<tr>
+					<td>Medium light</td>
+					<td><span id="rekomMedium"></span></td>
+				</tr>
+				<tr>
+					<td>Low light</td>
+					<td><span id="rekomLow"></span></td>
+				</tr>
+				<tr>
+					<td rowspan="2" class="col-sm-4"><strong>Volume</strong></td>
+					<td class="col-sm-4">Volume tank</td>
+					<td class="col-sm-4"><span id="volume"></span></td>
+				</tr>
+				<tr>
+					<td>Volume air</td>
+					<td><span id="volair"></span></td>
+				</tr>
+				<tr>
+					<td rowspan="2"><strong>Filtrasi</strong></td>
+					<td>Filter minimal</td>
+					<td><span id="filmin"></span></td>
+				</tr>
+				<tr>
+					<td>Filter maksimal</td>
+					<td><span id="filmax"></span></td>
+				</tr>
+				<tr>
+					<td rowspan="4"><strong>Kebutuhan Substrate</strong></td>
+					<td>Total</td>
+					<td><span id="volSubstrate"></span></td>
+				</tr>
+				<tr>
+					<td>Soil Amazonia 9L</td>
+					<td><span id="amazonia"></span></td>
+				</tr>
+				<tr>
+					<td>Pasir Malang</td>
+					<td><span id="malang"></span></td>
+				</tr>
+				<tr>
+					<td>Pasir Silika</td>
+					<td><span id="silika"></span></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-	<div id="UkuranKanan">
-		Ukuran tank = <b class="hurufGede" id="ukuran">0 x 0 x 0</b> <br>
-		Volume tank = <b class="hurufGede" id="volume">0 liter</b><br>
-		Volume air = <b class="hurufGede" id="volair">0 liter</b><br><br>
-		<a href="javascript:void(0)" name="ket3" onclick="keterangan(this);return false;" class="spasibawah">Rekomendasi Total Watt LED***</a><br> 
-		<select id="light" onchange="dayaLed()">
-			<option value="15">Low Light</option>
-			<option value="26">Medium Light</option>
-			<option value="51">High Light</option>
-		</select> 
-		= <b class="hurufGede" id="rekomendasi">0 Watt</b>
-	</div>
-</div>
-<div id="CalLed">
-	<div id="LedKiri">
-		<h3>Masukkan Jumlah LED Yang Akan Digunakan</h3>
-		<form>
-			<div id="LabelLed">
-				<div class="spasibawah"><label><a href="javascript:void(0)" name="ket1" onclick="keterangan(this);return false;">Daya per LED* </a></label></div>
-				<div class="spasibawah"><label for="putih">Led Putih </label></div>
-				<div class="spasibawah"><label for="merah">Led Merah </label></div>
-				<div class="spasibawah"><label for="biru">Led Biru </label></div>
-			</div>
-			<div id="InputLed">
-				<div class="spasibawah"><input type="radio" id="1" name="watt" value="1" onchange="handleClick(this);" checked="checked" /><label for="1">1W</label>
-				<input type="radio" id="3" name="watt" value="3" onchange="handleClick(this);" /><label for="3">3W</label></div>
-				<div class="spasibawah">= <input type="number" id="putih" size="5" placeholder="isi angka" onkeyup="hitungLumen()" onchange="hitungLumen()"/></div>
-				<div class="spasibawah">= <input type="number" id="merah" size="5" placeholder="isi angka" onkeyup="hitungLumen()" onchange="hitungLumen()"/></div>
-				<div class="spasibawah">= <input type="number" id="biru" size="5" placeholder="isi angka" onkeyup="hitungLumen()" onchange="hitungLumen()"/></div>
-			</div>
-		</form>
-	</div>
-	<div id="LedKanan">
-		<br>Lumen/Liter = <b class="hurufGede" id="hasilLumen">0</b>
-		<br><a href="javascript:void(0)" name="ket2" onclick="keterangan(this);return false;">Kategori**</a> = <b class="hurufGede" id="kategori">Not Enough Light</b>
-	</div>
-</div>
-<div id="Info">
-<div id="JudulInfo"><h3>Informasi Lainnya</h3></div>
-	<div id="InfoKiri">
-		<h3>Filtrasi</h3>
-		Minimal = <b class="hurufGede" id="filmin">0 l/h</b>
-		<br>Maksimal = <b class="hurufGede" id="filmax">0 l/h</b>
-	</div>
-	<div id="InfoKanan">
-		<h3>Kebutuhan Substrate</h3>
-		Total = <b class="hurufGede" id="volSubstrate">0 liter</b>
-		<br>Soil Amazonia 9L = <b class="hurufGede" id="amazonia">0 kantong</b>
-		<br>Pasir Malang = <b class="hurufGede" id="malang">&plusmn; 0 kg</b>
-		<br>Pasir Silika = <b class="hurufGede" id="silika">&plusmn; 0 kg</b>
-	</div>
-</div>
-<div id="Keterangan">
-<div id="ket" class="fadein"><b>Keterangan klik tulisan merah</b></div>
-	<div id="ket1" class="fadeout">
-		<b>*Nilai Lumen LED 1W</b>
-		<ul style="list-style-type:square">
-			<li>Led Putih (Warm, Daylight, White, Cool, Cold) = 110 - 120 lm</li>
-			<li>Led Merah (Grow Red 660 nm) = 45 - 55 lm</li>
-			<li>Led Biru (Grow Blue 455 nm) = 25 - 30 lm</li>
-		</ul>
-		<b>*Nilai Lumen LED 3W</b>
-		<ul style="list-style-type:square">
-			<li>Led Putih (Warm, Daylight, White, Cool, Cold) = 200 - 220 lm</li>
-			<li>Led Merah (Grow Red 660 nm) = 90 - 110 lm</li>
-			<li>Led Biru (Grow Blue 455 nm) = 40 - 45 lm</li>
-		</ul>
-	</div>
-	<div id="ket2" class="fadeout">
-		<b>**Kategori Pencahayaan Berdasarkan Lumen/Liter</b>
-		<ul style="list-style-type:square">
-			<li>15 - 25 lumen/liter = Low Light / Easy</li>
-			<li>25 - 50 lumen/liter = Medium Light</li>
-			<li>&#62; 50 lumen/liter = High Light / Advance</li>
-		</ul>
-	</div>
-	<div id="ket3" class="fadeout">
-		<b>***Rekomendasi daya LED dengan asumsi semua LED berwarna putih.</b>
+	<div class="col-sm-4">
+		
 	</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
