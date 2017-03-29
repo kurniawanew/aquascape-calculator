@@ -1,3 +1,5 @@
+var volAir;
+
 function ukuranTank() {
 	var panjang = $("#panjang").val();
    	var lebar = $("#lebar").val();
@@ -52,6 +54,31 @@ function rekomendasiLed() {
 	$("#rekomHigh").text(Math.ceil(volAir*51/110)+" Watt");
 	$("#rekomMedium").text(Math.ceil(volAir*26/110)+" Watt");
 	$("#rekomLow").text(Math.ceil(volAir*16/110)+" Watt");
+	$("#ketRekom").text('(bila menggunakan LED putih 1 Watt)');
+}
+
+function hitungBukanLed() {
+	var daya = ($("#daya").val() != '') ? $("#daya").val() : 0;
+	var wattLiter = daya / volAir;
+	var kategori;
+
+	if(wattLiter < 0.6) {
+		kategori = "Low Light";
+	} else if(wattLiter >= 0.6 && wattLiter <= 1) {
+		kategori = "Medium Light";
+	} else if(wattLiter > 1) {
+		kategori = "High Light";
+	} else {
+		kategori = "Cahaya Tidak Cukup!";
+	}
+	$("#kategori").text(kategori);
+}
+
+function rekomendasiBukanLed() {
+	$("#rekomHigh").text(Math.ceil(volAir*1)+" Watt");
+	$("#rekomMedium").text(Math.ceil(volAir*0.8)+" Watt");
+	$("#rekomLow").text(Math.ceil(volAir*0.5)+" Watt");
+	$("#ketRekom").text('');
 }
 
 function pecahan(angka) {
@@ -83,22 +110,32 @@ function pecahan(angka) {
 }
 
 $(document).ready(function(){
+	var iniLed = true;
+
+	$("#panjang").focus();
 
 	$("input[name='jenis']:radio").change(function(){
-		console.log($(this).val());
 		if($(this).val() == "led") {
 			$("#led").collapse("show");
 			$("#bukanLed").collapse("hide");
+			iniLed = true;
 		} else if($(this).val() == "bukanLed") {
 			$("#bukanLed").collapse("show");
 			$("#led").collapse("hide");
+			iniLed = false;
 		}
 	});
 
 	$("#hitung").click(function(){
 		ukuranTank();
-		hitungLed();
-		rekomendasiLed();
+		if(iniLed) {
+			hitungLed();
+			rekomendasiLed();
+		} else {
+			hitungBukanLed();
+			rekomendasiBukanLed();
+		}
+		
 		$("#hasilHitung").collapse("show");
 		$("html, body").animate({ scrollTop: $(document).height()-$(window).height() });
 	});
