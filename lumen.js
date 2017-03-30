@@ -1,10 +1,10 @@
-var volAir;
+var volAir = 0;
 
 function ukuranTank() {
 	var panjang = $("#panjang").val();
-   	var lebar = $("#lebar").val();
-   	var tinggi = $("#tinggi").val();
-   	var substrate = $('#substrate').val();
+	var lebar = $("#lebar").val();
+	var tinggi = $("#tinggi").val();
+	var substrate = $('#substrate').val();
    	if (panjang != "" && lebar != "" && tinggi != "" && substrate != "") {
 		var volume = (panjang*lebar*tinggi)/1000;
 		var volSubstrate = (panjang * lebar * substrate)/1000;
@@ -20,6 +20,12 @@ function ukuranTank() {
 		$("#amazonia").html("&plusmn; "+pecahan(amazonia) +" kantong");
 		$("#malang").html("&plusmn; "+ pecahan(malang) +" kg");
 		$("#silika").html("&plusmn; "+ pecahan(silika) +" kg");
+		return true;
+	} else {
+		$(".alert").addClass('alert-danger').append('Lengkapi form spesifikasi tank!').fadeIn();
+		$('html, body').animate({ scrollTop: $(".jumbotron").offset().top }, 1000);
+		$("#panjang, #lebar, #tinggi, #substrate").parents(".form-group").addClass("has-error");
+		return false;
 	}
 }
 
@@ -81,6 +87,18 @@ function rekomendasiBukanLed() {
 	$("#ketRekom").text('');
 }
 
+function warnaTabel() {
+	var klas;
+	for (var i = 1; i <= 12; i++) {
+		if(i<10) {
+			klas = 'success';
+		} else {
+			klas = 'danger';
+		}
+		$("#hasilHitung").find("tr:nth-child("+i+")").addClass(klas);
+	}
+}
+
 function pecahan(angka) {
 	var p = angka.toString().split(".");
 	var bulat = parseFloat(p[0]);
@@ -111,6 +129,11 @@ function pecahan(angka) {
 
 $(document).ready(function(){
 	var iniLed = true;
+	var isKaton = false;
+
+	warnaTabel();
+
+	$(".alert").hide();
 
 	$("#panjang").focus();
 
@@ -126,9 +149,8 @@ $(document).ready(function(){
 		}
 	});
 
-	var isKaton = false;
 	$("#hitung").click(function(){
-		ukuranTank();
+		if(!ukuranTank()) {return false;}
 		if(iniLed) {
 			hitungLed();
 			rekomendasiLed();
@@ -139,12 +161,12 @@ $(document).ready(function(){
 		
 		$("#hasilHitung").collapse("show");
 		if(isKaton) {
-			$('html, body').animate({ scrollTop: $("#hasilHitung").offset().top }, 1000);
+			$('html, body').animate({ scrollTop: $("#hitung").offset().top }, 1000);
 		}
 	});
 
 	$("#hasilHitung").on('shown.bs.collapse', function(){
 		isKaton = true;
-        $('html, body').animate({ scrollTop: $("#hasilHitung").offset().top }, 1000);
+        $('html, body').animate({ scrollTop: $("#hitung").offset().top }, 1000);
     });
 });
